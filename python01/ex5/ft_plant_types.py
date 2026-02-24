@@ -4,6 +4,12 @@ class Plant:
         self.height = height
         self.age = age
 
+    def plant_data(self, type: str) -> None:
+        print(
+            f"{self.name} ({type}): {self.height}cm, "
+            f"{self.age} days, ", end=""
+            )
+
 
 class Flower(Plant):
     def __init__(self, name: str, height: int, age: int, color: str) -> None:
@@ -11,10 +17,8 @@ class Flower(Plant):
         self.color = color
 
     def plant_data(self) -> None:
-        print(
-            f"{self.name} (Flower): {self.height}cm, "
-            f"{self.age} days, {self.color} color"
-            )
+        super().plant_data("Flower")
+        print(f"{self.color} color")
 
     def poly(self) -> None:
         self.bloom()
@@ -30,10 +34,8 @@ class Tree(Plant):
         self.trunk_diameter = trunk_diameter
 
     def plant_data(self) -> None:
-        print(
-            f"{self.name} (Tree): {self.height}cm, "
-            f"{self.age} days, {self.trunk_diameter} diameter"
-        )
+        super().plant_data("Tree")
+        print(f"{self.trunk_diameter}cm diameter")
 
     def poly(self) -> None:
         self.produce_shade()
@@ -51,10 +53,8 @@ class Vegetable(Plant):
         self.nutritional_value = nutritional_value
 
     def plant_data(self) -> None:
-        print(
-            f"{self.name} (Vegetable): {self.height}cm, "
-            f"{self.age} days, {self.harvest_season} harvest"
-            )
+        super().plant_data("Vegetable")
+        print(f"{self.harvest_season} harvest")
 
     def poly(self) -> None:
         self.food_value()
@@ -66,12 +66,17 @@ class Vegetable(Plant):
 if __name__ == "__main__":
     print("=== Garden Plant Types ===\n")
     plants = [
-        Flower("Rose", 12, 50, "red"),
+        Flower("Rose", 25, 30, "red"),
+        Flower("Tulip", 15, 40, "yellow"),
+
         Tree("Oak", 500, 1825, 50),
-        Vegetable("Tomato", 80, 90, "summer", "vitamine C")
+        Tree("Pine", 800, 3000, 30),
+
+        Vegetable("Tomato", 80, 90, "summer", "vitamin C"),
+        Vegetable("Carrot", 30, 70, "winter", "vitamin A"),
     ]
 
     for i in plants:
         i.plant_data()
         i.poly()
-        print("\n")
+        print()
