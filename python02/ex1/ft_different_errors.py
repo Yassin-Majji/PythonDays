@@ -1,50 +1,49 @@
 def garden_operations(step: str):
     if step == "ValueError":
-        try:
-            print(f"Testing {step}...")
             int("abc")
-        except ValueError:
-            raise ValueError(f"Caught {step}: invalid literal for int()")
+
     elif step == "ZeroDivisionError":
-        try:
-            print(f"Testing {step}...")
             7 / 0
-        except ZeroDivisionError:
-            raise ZeroDivisionError(f"Caught {step}: division by zero")
     elif step == "FileNotFoundError":
-        try:
-            print(f"Testing {step}...")
-            file = "missing.txt"
-            open(file)
-        except FileNotFoundError:
-            raise FileNotFoundError(f"Caught {step}: No such file '{file}'")
+            open("missing.txt")
+
     elif step == "KeyError":
-        try:
-            print(f"Testing {step}...")
             d = {"name": "ahmed"}
-            print(d["age"])
-        except KeyError:
-            raise KeyError(f"Caught {step}: 'missing\\_plant'")
-    elif
+            print(d["missing\\_plant"])
+
+    elif step == "MultipleError":
+         d = {"name": "ahmed"}
+         print(d["missing\\_plant"])
+
+         int("abc")
+
+         open("missing.txt")
+
 
 
 def test_error_types():
     print("=== Garden Error Types Demo ===\n")
     list_errors = ["ValueError", "ZeroDivisionError", "FileNotFoundError", "KeyError", "MultipleError"]
-    for i in list_errors:
-        try:
-            garden_operations(i)
-        except ValueError as e:
-            print(e)
-        except ZeroDivisionError as e:
-            print(e)
-        except FileNotFoundError as e:
-            print(e)
-        except KeyError as e:
-            print(e)
-        print("\n")
-    print("Testing multiple errors together...")
-    print("Caught an error, but program continues!")
+    for err in list_errors:
+        if(err != "MultipleError"):
+            try:
+                print(f"Testing {err}...")
+                garden_operations(err)
+            except ValueError:
+                print(f"Caught {err}: invalid literal for int()")
+            except ZeroDivisionError:
+                print(f"Caught {err}: division by zero")
+            except FileNotFoundError as e:
+                print(f"Caught FileNotFoundError: No such file '{e.filename}'")
+            except KeyError as e:
+                print(f"Caught {err}: '{e.args[0]}'")
+            print()
+        else:
+            try:
+                  print("Testing multiple errors together...")
+                  garden_operations(err)
+            except (ValueError, ZeroDivisionError, FileNotFoundError, KeyError):
+                print("Caught an error, but program continues!")
     print("\nAll error types tested successfully!")
 
 
