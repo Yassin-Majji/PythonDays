@@ -9,6 +9,7 @@ class PlantError(GardenError):
 class WaterError(GardenError):
     pass
 
+
 def raise_custom_errors(step: str) -> None:
     if (step == "PlantError"):
         raise PlantError("The tomato plant is wilting!")
